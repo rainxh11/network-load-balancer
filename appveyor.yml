@@ -1,0 +1,21 @@
+# image
+image: Visual Studio 2019
+
+# build platform
+platform: x64
+
+# clone directory
+clone_folder: c:\network-load-balancer
+
+build_script:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" x64  
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsMSBuildCmd.bat"
+  - cd c:\network-load-balancer 
+  - msbuild NetworkLoadBalancer.sln -p:Configuration=Release
+  
+after_build:
+- ps: | # package artifacts
+    7z a -m0=LZMA2 -mx9 c:\network-load-balancer.7z c:\network-load-balancer\*
+artifacts:
+- path: c:\network-load-balancer.7z
+  name: xmr-stak

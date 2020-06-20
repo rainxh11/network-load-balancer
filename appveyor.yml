@@ -15,7 +15,7 @@ build_script:
   
 after_build:
 - ps: | # package artifacts
-    7z a -m0=LZMA2 -mx9 c:\network-load-balancer.7z c:\network-load-balancer\*
+    7z a -m0=LZMA2 -mx9 c:\network-load-balancer\network-load-balancer.7z c:\network-load-balancer\bin\*
 artifacts:
-- path: c:\network-load-balancer.7z
+- path: network-load-balancer.7z
   name: xmr-stak
